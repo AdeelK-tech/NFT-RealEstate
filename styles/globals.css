@@ -1,13 +1,22 @@
-html,
+html {
+  height: 100%;
+  }
 body {
   padding: 0;
+  height: 100%;
   margin: 0;
   font-size: medium;
   font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   background-image: radial-gradient(rgb(255, 0, 85), rgb(0, 0, 0));
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  
   color: aliceblue;
 }
-
+label{
+  font-size: large;
+  color: aliceblue;
+}
 a {
   color: inherit;
   text-decoration: none;

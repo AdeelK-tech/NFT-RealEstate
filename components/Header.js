@@ -1,21 +1,30 @@
 import React from "react";
 import { Menu } from "semantic-ui-react";
+import { Link, Router } from "../routes";
 const Header = () => {
   return (
     <Menu style={{ marginTop: "10px" }}>
-      <Menu.Item>
-        <b>NFT BAZAAR</b>
-      </Menu.Item>
+      <Link route='/'>
+        <a className="item">
+          <b>NFT CHOWK</b>
+        </a>
+      </Link>
       <Menu.Menu position="right">
-        <Menu.Item>
-          <b>MARKET</b>
-        </Menu.Item>
-        <Menu.Item>
-          <b>AUCTION</b>
-        </Menu.Item>
-        <Menu.Item>
-          <b>+ CreateNFT</b>
-        </Menu.Item>
+        <Link route='/nfts/market'>
+          <a className="item">
+            <b>MARKET</b>
+          </a>
+        </Link>
+        <Link route='/nfts/auction'>
+          <a className="item">
+            <b>AUCTION</b>
+          </a>
+        </Link>
+        <Link route='/nfts/create'>
+          <a className="item">
+            <b>+ CreateNFT</b>
+          </a>
+        </Link>
       </Menu.Menu>
     </Menu>
   );
