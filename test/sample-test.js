@@ -1,19 +1,24 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
 
-describe("Greeter", function () {
-  it("Should return the new greeting once it's changed", async function () {
-    const Greeter = await ethers.getContractFactory("Greeter");
-    const greeter = await Greeter.deploy("Hello, world!");
-    await greeter.deployed();
+describe('Testing contract', () => {
+  let address;
+  let contract;
+  let nftContract
+  let owner;
+  let addr1;
+   beforeEach(async() => {
+     [owner,addr1]=await ethers.getSigners();
+     contract= await ethers.getContractFactory('NFT');
+      nftContract=await contract.deploy();
+    address =nftContract.address;
+    });
 
-    expect(await greeter.greet()).to.equal("Hello, world!");
-
-    const setGreetingTx = await greeter.setGreeting("Hola, mundo!");
-
-    // wait until the transaction is mined
-    await setGreetingTx.wait();
-
-    expect(await greeter.greet()).to.equal("Hola, mundo!");
-  });
+    describe('first test', () => {
+      it('print address',async () => {
+        console.log(address);
+        await nftContract.caller();
+        console.log(owner.address)
+      });
+    });
 });
