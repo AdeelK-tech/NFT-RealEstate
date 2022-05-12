@@ -1,10 +1,10 @@
 // SPDX-License-Identifier:MIT
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.4;
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "./NFT.sol";
-
-contract Market is Ownable {
+import '@openzeppelin/contracts/security/ReentrancyGuard.sol';
+contract Market is Ownable, ReentrancyGuard {
     using Counters for Counters.Counter;
     Counters.Counter private item_ID;
     Counters.Counter private items_Sold;
@@ -21,7 +21,7 @@ contract Market is Ownable {
         address owner;
     }
 
-    function getSoldItems() public view returns (uint) {
+    function get_noOfSoldItems() public view returns (uint) {
         return items_Sold.current();
     }
 
@@ -29,7 +29,8 @@ contract Market is Ownable {
         uint _tokenID,
         uint _price,
         address nftContractAddress
-    ) public {
+    ) public nonReentrant() {
+        item_ID.increment();
         idToMarketItem[item_ID.current()] = marketItem(
             _tokenID,
             false,
@@ -37,18 +38,19 @@ contract Market is Ownable {
             payable(msg.sender),
             address(0)
         );
+        console.log('address of the creator',idToMarketItem[item_ID.current()].seller);
         NFT(nftContractAddress).transferFrom(
             msg.sender,
             address(this),
             _tokenID
         );
-        item_ID.increment();
+        
         emit transferToMarket(_tokenID, msg.sender, address(this));
     }
 
-    function buyItem(uint itemID, address nftContractAddress) public payable {
+    function buyItem(uint itemID, address nftContractAddress) public payable nonReentrant() {
         marketItem storage item = idToMarketItem[itemID];
-        if (msg.value < item.price) {
+        if(msg.value<item.price){
             revert lessMoneythanPrice();
         }
         item.seller.transfer(msg.value - ownerRoyality);
@@ -61,14 +63,54 @@ contract Market is Ownable {
         item.owner = msg.sender;
         item.sold = true;
         items_Sold.increment();
+        console.log('address of buyer:',msg.sender);
     }
 
     function getCreatedItems() public view returns (marketItem[] memory) {
-        marketItem[] memory items;
+        uint itemCount;
         uint j;
-        for (uint i = 0; i < item_ID.current(); i++) {
-            if (idToMarketItem[i].seller == msg.sender) {
-                items[j] = idToMarketItem[i];
+        for(uint i=1;i<=item_ID.current();i++){
+            if(idToMarketItem[i].seller==msg.sender){
+                itemCount++;
+            }
+        }
+        marketItem[] memory items=new marketItem[](itemCount);
+        for(uint i=1;i<=item_ID.current();i++){
+            if(idToMarketItem[i].seller==msg.sender){
+                items[j]=idToMarketItem[i];
+                j++;
+            }
+        }
+        return items;
+    }
+    function fetchMyNfts()public view returns(marketItem[]memory){
+        uint itemCount;
+        uint j;
+        for (uint i = 1; i <= item_ID.current(); i++) {
+            if (idToMarketItem[i].owner == msg.sender){
+                itemCount++;
+                
+            }
+        }
+        marketItem[] memory items=new marketItem[](itemCount);
+        for(uint i=1;i<=item_ID.current();i++){
+            if(idToMarketItem[i].owner==msg.sender){
+                items[j]=idToMarketItem[i];
+                j++;
+            }
+        }
+        return items;
+    }
+    function fetchMarketItems()public view returns(marketItem[] memory){
+         
+        uint j;
+        uint itemCount=item_ID.current();
+        uint unsoldItemCount=item_ID.current()-items_Sold.current();
+        marketItem[] memory items=new marketItem[](unsoldItemCount);
+        for (uint i = 0; i < itemCount; i++) {
+            if (idToMarketItem[i+1].sold==false) {
+                items[j] = idToMarketItem[i+1];
+                j++;
             }
         }
         return items;

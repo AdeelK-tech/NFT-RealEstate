@@ -19,8 +19,8 @@ const createNFT = () => {
           <Input style={{width:'500px'}}></Input>
         </Form.Field>
         <Form.Field>
-          <label style={{ fontSize: "large" }}>Name</label>
-          <Input style={{width:'500px'}}></Input>
+          <label style={{ fontSize: "large" }}>Upload Image</label>
+          <Input style={{width:'500px'}} type='file'></Input>
         </Form.Field>
       </Form>
       </Grid.Column>
