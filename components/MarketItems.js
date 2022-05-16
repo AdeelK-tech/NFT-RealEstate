@@ -15,21 +15,22 @@ const MarketItems=({loading,items})=>{
          header:nft.name,
          meta:`Price: ${nft.price} ETH`,
          description: nft.description,
-         extra:<Link route={`/nfts/market/item/${i+1}`}><a><Button secondary>View item
+         extra:<Link route={`/nfts/market/item/${nft.itemId}`}><a><Button secondary>View item
          <Icon name='right chevron' /></Button></a>
          </Link>
-     }       
+     }       //fix add item id to the struct of item///
+            //fix add item id to the struct of item///
     })
 
     console.log(displayItems);
 
     return(
-        <Layout>
+        <div>
         {loading?(<Loader active inline='centered' />):
-        <Card.Group divided={true} items={displayItems}></Card.Group>
+        <Card.Group items={displayItems}></Card.Group>
 
         }
-        </Layout>
+        </div>
     )
 }
 export default MarketItems

@@ -10,7 +10,7 @@ export default function Home({props}) {
   return (
     <Layout>
        <Header as='h1' dividing style={{fontSize:'35px',color:'white',fontFamily:'tahoma'}}>
-  A REAL STATE NFT
+  A REAL ESTATE NFT
    MARKETPLACE
   </Header>
       <Image src='/image_2.png' width={`${850}px`} height={`${350}px`}></Image>

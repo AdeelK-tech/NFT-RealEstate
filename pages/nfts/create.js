@@ -51,11 +51,11 @@ const createNFT = () => {
       const added=await client.add(data);
       const url=`https://ipfs.infura.io/ipfs/${added.path}`
       createMarketItem(url);
-      Router.pushRoute('/nfts/market')
+      
     } catch (error) {
       console.log(error)
     }
-    setLoading(false)
+    
   }
   //function to create item on chain
   const createMarketItem=async(tokenURI)=>{
@@ -69,6 +69,8 @@ const createNFT = () => {
     await marketInstance.methods.createItem(tokenId,priceInWei,nftInstance._address).send({
       from:accounts[0]
     })
+    setLoading(false)
+    Router.pushRoute('/nfts/market')
     console.log('created');
   }
   return (
@@ -95,6 +97,7 @@ const createNFT = () => {
           <Input style={{width:'500px'}} label='ETH' labelPosition="right" value={price} onChange={priceChangeHandler} required></Input>
         </Form.Field>
         <Button secondary content='Create' loading={loading}></Button>
+        <h2>Note: You have to sign two transactions to create an NFT, So please be patient you will be automatically routed to market once your NFT is created.</h2>
       </Form>
       </Grid.Column>
       <Grid.Column width={8}>

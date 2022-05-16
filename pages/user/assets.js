@@ -1,27 +1,25 @@
-import { React, useState, useEffect } from "react";
-
+import { React, useEffect, useState } from "react";
+import Assets from "../../components/Assets";
 import marketInstance from "../../marketInstance";
+import web3 from "../../web3";
 import nftInstance from "../../nftInstance";
 import axios from "axios";
-import web3 from "../../web3";
-import MarketItems from "../../components/MarketItems";
 import Layout from "../../components/Layout";
-
-const market = () => {
+const userAssets = () => {
   const [loading,setLoading]=useState(false)
-  const [NFTS, setNFTS] = useState([]);
-  const getNFTS =async () => {
-    setLoading(true)
-    const items = await marketInstance.methods.fetchMarketItems().call();
-    console.log(items)
-    const marketItems = await Promise.all(
+  const [assets, setAssets] = useState([]);
+  const getAssets = async () => {
+      setLoading(true)
+    const accounts = await web3.eth.requestAccounts();
+    const items = await marketInstance.methods.fetchMyNfts().call({
+      from: accounts[0],
+    });
+    const userAssets = await Promise.all(
       items.map(async (i) => {
         const tokenURI = await nftInstance.methods.tokenURI(i.tokenID).call();
-        console.log(tokenURI);
         const meta = await axios.get(tokenURI);
         const price = web3.utils.fromWei(i.price, "ether");
         const item = {
-          itemId:i.itemId,
           tokenId: i.tokenID,
           owner: i.owner,
           seller: i.seller,
@@ -32,24 +30,18 @@ const market = () => {
         };
         return item;
       })
-      
     );
-    setNFTS(marketItems);
+    setAssets(userAssets);
     setLoading(false)
   };
-  useEffect(()=>{getNFTS()}, []);
-  console.log(NFTS)
-  
- 
+  useEffect(() => {
+    getAssets();
+  }, []);
+
   return(
     <Layout>
-
-    {NFTS.length===0?<h1>No nfts in the Market.</h1>:<MarketItems loading={loading} items={NFTS}></MarketItems>}
+    {assets.length===0?<h1>No owned Assets.</h1>:<Assets assets={assets}loading={loading} />}
     </Layout>
-   
-   
   )
 };
-
-
-export default market;
+export default userAssets;

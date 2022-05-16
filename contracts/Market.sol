@@ -14,6 +14,7 @@ contract Market is Ownable, ReentrancyGuard {
     event transferToMarket(uint id, address from, address to);
     error lessMoneythanPrice();
     struct marketItem {
+        uint itemId;
         uint tokenID;
         bool sold;
         uint price;
@@ -31,7 +32,9 @@ contract Market is Ownable, ReentrancyGuard {
         address nftContractAddress
     ) public nonReentrant() {
         item_ID.increment();
+        uint itemId=item_ID.current();
         idToMarketItem[item_ID.current()] = marketItem(
+            itemId,
             _tokenID,
             false,
             _price,
