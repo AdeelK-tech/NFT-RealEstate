@@ -25,7 +25,7 @@ describe('Testing contract', () => {
       await marketContract.createItem(2,2000,nftContract.address);
       await marketContract.createItem(3,2000,nftContract.address);
       expect(await nftContract.ownerOf(1)).to.equal(marketContract.address)
-      await marketContract.connect(addr1).buyItem(1,nftContract.address,{value:1000000000000000000n})
+      await marketContract.connect(addr1).buyItem(1,nftContract.address,{value:100000000000000000n})
       expect (await nftContract.ownerOf(1)).to.equal(addr1.address)
       const items=await marketContract.connect(addr1).fetchMyNfts();
       console.log(items)

@@ -1,10 +1,19 @@
+import {React,useState} from 'react'
 import Layout from "../components/Layout";
-import { Button, Grid } from "semantic-ui-react";
+import { Button, Grid,Header } from "semantic-ui-react";
 import {Link} from '../routes'
-export default function Home() {
+import Image from "next/image";
+import '../styles/Home.module.css'
+
+export default function Home({props}) {
+  
   return (
     <Layout>
-      <h2><u>LATEST NEWS RELATED TO NFTS</u></h2>
+       <Header as='h1' dividing style={{fontSize:'35px',color:'white',fontFamily:'tahoma'}}>
+  A REAL STATE NFT
+   MARKETPLACE
+  </Header>
+      <Image src='/image_2.png' width={`${850}px`} height={`${350}px`}></Image>
       <Link route='/nfts/create'>
       <a>
       <Button

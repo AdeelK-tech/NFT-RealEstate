@@ -1,0 +1,35 @@
+import React from 'react'
+import Layout from './Layout'
+import { Card, Loader,Button,Icon } from 'semantic-ui-react'
+import{Link} from '../routes'
+
+const MarketItems=({loading,items})=>{
+    
+    
+   
+    const displayItems=items.map((nft,i)=>{
+     return{
+
+        
+         image:nft.image,
+         header:nft.name,
+         meta:`Price: ${nft.price} ETH`,
+         description: nft.description,
+         extra:<Link route={`/nfts/market/item/${i+1}`}><a><Button secondary>View item
+         <Icon name='right chevron' /></Button></a>
+         </Link>
+     }       
+    })
+
+    console.log(displayItems);
+
+    return(
+        <Layout>
+        {loading?(<Loader active inline='centered' />):
+        <Card.Group divided={true} items={displayItems}></Card.Group>
+
+        }
+        </Layout>
+    )
+}
+export default MarketItems
