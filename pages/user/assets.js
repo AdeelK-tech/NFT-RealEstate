@@ -6,10 +6,10 @@ import nftInstance from "../../nftInstance";
 import axios from "axios";
 import Layout from "../../components/Layout";
 const userAssets = () => {
-  const [loading,setLoading]=useState(false)
+  const [loading, setLoading] = useState(false);
   const [assets, setAssets] = useState([]);
   const getAssets = async () => {
-      setLoading(true)
+    setLoading(true);
     const accounts = await web3.eth.requestAccounts();
     const items = await marketInstance.methods.fetchMyNfts().call({
       from: accounts[0],
@@ -32,16 +32,12 @@ const userAssets = () => {
       })
     );
     setAssets(userAssets);
-    setLoading(false)
+    setLoading(false);
   };
   useEffect(() => {
     getAssets();
   }, []);
 
-  return(
-    <Layout>
-    {assets.length===0?<h1>No owned Assets.</h1>:<Assets assets={assets}loading={loading} />}
-    </Layout>
-  )
+  return <Assets assets={assets} loading={loading} />;
 };
 export default userAssets;

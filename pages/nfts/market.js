@@ -5,15 +5,14 @@ import nftInstance from "../../nftInstance";
 import axios from "axios";
 import web3 from "../../web3";
 import MarketItems from "../../components/MarketItems";
-import Layout from "../../components/Layout";
 
 const market = () => {
-  const [loading,setLoading]=useState(false)
+  const [loading, setLoading] = useState(false);
   const [NFTS, setNFTS] = useState([]);
-  const getNFTS =async () => {
-    setLoading(true)
+  const getNFTS = async () => {
+    setLoading(true);
     const items = await marketInstance.methods.fetchMarketItems().call();
-    console.log(items)
+    console.log(items);
     const marketItems = await Promise.all(
       items.map(async (i) => {
         const tokenURI = await nftInstance.methods.tokenURI(i.tokenID).call();
@@ -21,7 +20,7 @@ const market = () => {
         const meta = await axios.get(tokenURI);
         const price = web3.utils.fromWei(i.price, "ether");
         const item = {
-          itemId:i.itemId,
+          itemId: i.itemId,
           tokenId: i.tokenID,
           owner: i.owner,
           seller: i.seller,
@@ -32,24 +31,16 @@ const market = () => {
         };
         return item;
       })
-      
     );
     setNFTS(marketItems);
-    setLoading(false)
+    setLoading(false);
   };
-  useEffect(()=>{getNFTS()}, []);
-  console.log(NFTS)
-  
- 
-  return(
-    <Layout>
+  useEffect(() => {
+    getNFTS();
+  }, []);
+  console.log(NFTS);
 
-    {NFTS.length===0?<h1>No nfts in the Market.</h1>:<MarketItems loading={loading} items={NFTS}></MarketItems>}
-    </Layout>
-   
-   
-  )
+  return <MarketItems loading={loading} items={NFTS}></MarketItems>;
 };
-
 
 export default market;

@@ -1,4 +1,4 @@
-import {React,useState} from "react";
+import { React, useState } from "react";
 import { Image, Card, Button, Grid } from "semantic-ui-react";
 import marketInstance from "../marketInstance";
 import web3 from "../web3";
@@ -7,21 +7,23 @@ import nftInstance from "../nftInstance";
 import { Router } from "../routes";
 
 const NFT = ({ NFT }) => {
-const [loading,setLoading]=useState(false)
-const buyNFT=async()=>{
-    setLoading(true)
-    try{
-        const accounts=await web3.eth.requestAccounts();
-        await marketInstance.methods.buyItem(NFT.itemId,nftInstance._address).send({
-            from:accounts[0],
-            value:web3.utils.toWei(NFT.price,'ether')
-        })
-        Router.pushRoute('/nfts/market')
-    }catch(error){
-        console.log(error)
+  const [loading, setLoading] = useState(false);
+  const buyNFT = async () => {
+    setLoading(true);
+    try {
+      const accounts = await web3.eth.requestAccounts();
+      await marketInstance.methods
+        .buyItem(NFT.itemId, nftInstance._address)
+        .send({
+          from: accounts[0],
+          value: web3.utils.toWei(NFT.price, "ether"),
+        });
+      Router.pushRoute("/nfts/market");
+    } catch (error) {
+      console.log(error);
     }
-setLoading(false)
-}
+    setLoading(false);
+  };
 
   return (
     <Layout>
@@ -40,7 +42,9 @@ setLoading(false)
           </Card.Group>
         </Grid.Row>
         <Grid.Row>
-          <Button secondary onClick={buyNFT} loading={loading}>Buy Item</Button>
+          <Button secondary onClick={buyNFT} loading={loading}>
+            Buy Item
+          </Button>
         </Grid.Row>
       </Grid>
     </Layout>

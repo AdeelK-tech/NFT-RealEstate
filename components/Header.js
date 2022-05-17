@@ -6,18 +6,13 @@ const Header = () => {
     <Menu style={{ marginTop: "10px" }}>
       <Link route="/">
         <a className="item">
-          <b>NFT CHOWK</b>
+          <b>NFT FARM</b>
         </a>
       </Link>
       <Menu.Menu position="right">
         <Link route="/nfts/market">
           <a className="item">
             <b>MARKET</b>
-          </a>
-        </Link>
-        <Link route="/nfts/auction">
-          <a className="item">
-            <b>AUCTION</b>
           </a>
         </Link>
         <Link route="/nfts/create">
