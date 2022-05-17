@@ -10,7 +10,7 @@ const item = ({ props }) => {
   const [marketItem, setMarketItem] = useState({});
   const { nft, id } = props;
   console.log(nft);
-  const getData = async () => {
+  const GetData = async () => {
     const tokenURI = await nftInstance.methods.tokenURI(nft.tokenID).call();
     console.log(nft);
     const meta = await axios.get(tokenURI);
@@ -28,7 +28,7 @@ const item = ({ props }) => {
     setMarketItem(item);
   };
   useEffect(() => {
-    getData();
+    GetData();
   }, []);
   console.log(marketItem);
   return <NFT NFT={marketItem}></NFT>;

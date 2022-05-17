@@ -8,7 +8,7 @@ import Layout from "../../components/Layout";
 const userAssets = () => {
   const [loading, setLoading] = useState(false);
   const [assets, setAssets] = useState([]);
-  const getAssets = async () => {
+  const GetAssets = async () => {
     setLoading(true);
     const accounts = await web3.eth.requestAccounts();
     const items = await marketInstance.methods.fetchMyNfts().call({
@@ -35,7 +35,7 @@ const userAssets = () => {
     setLoading(false);
   };
   useEffect(() => {
-    getAssets();
+    GetAssets();
   }, []);
 
   return <Assets assets={assets} loading={loading} />;

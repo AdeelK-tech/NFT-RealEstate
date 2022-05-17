@@ -9,7 +9,7 @@ import marketInstance from "../marketInstance";
 function Home() {
   const [createdItems, setCreatedItems] = useState(0);
   const [soldItems, setSoldItems] = useState(0);
-  const getStats = async () => {
+  const GetStats = async () => {
     const createdItems = await marketInstance.methods
       .get_noOfCreatedItems()
       .call();
@@ -19,7 +19,7 @@ function Home() {
     setSoldItems(soldItems);
   };
   useEffect(() => {
-    getStats();
+    GetStats();
   }, []);
   return (
     <Layout>

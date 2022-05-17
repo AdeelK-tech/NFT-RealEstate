@@ -15,16 +15,16 @@ const createNFT = () => {
   const [description, setDescription] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const nameChangeHandler = (e) => {
+  const NameChangeHandler = (e) => {
     setName(e.target.value);
   };
-  const desChangeHandler = (e) => {
+  const DesChangeHandler = (e) => {
     setDescription(e.target.value);
   };
-  const priceChangeHandler = (e) => {
+  const PriceChangeHandler = (e) => {
     setPrice(e.target.value);
   };
-  const fileChangeHandler = async (e) => {
+  const FileChangeHandler = async (e) => {
     const file = e.target.files[0];
     try {
       const added = await client.add(file);
@@ -35,7 +35,7 @@ const createNFT = () => {
     }
   };
   //function to save metadata on ipfs
-  const saveItemData = async () => {
+  const SaveItemData = async () => {
     if (!price || !name || !fileURL) {
       return;
     }
@@ -48,13 +48,13 @@ const createNFT = () => {
     try {
       const added = await client.add(data);
       const url = `https://ipfs.infura.io/ipfs/${added.path}`;
-      createMarketItem(url);
+      CreateMarketItem(url);
     } catch (error) {
       console.log(error);
     }
   };
   //function to create item on chain
-  const createMarketItem = async (tokenURI) => {
+  const CreateMarketItem = async (tokenURI) => {
     const accounts = await web3.eth.requestAccounts();
 
     const tx = await nftInstance.methods.createToken(tokenURI).send({
@@ -79,13 +79,13 @@ const createNFT = () => {
       <Grid colunms={2}>
         <Grid.Row>
           <Grid.Column width={8}>
-            <Form onSubmit={saveItemData}>
+            <Form onSubmit={SaveItemData}>
               <Form.Field>
                 <label style={{ fontSize: "large" }}>Name of Property</label>
                 <Input
                   style={{ width: "500px" }}
                   value={name}
-                  onChange={nameChangeHandler}
+                  onChange={NameChangeHandler}
                   required
                 ></Input>
               </Form.Field>
@@ -94,7 +94,7 @@ const createNFT = () => {
                 <Input
                   style={{ width: "500px" }}
                   value={description}
-                  onChange={desChangeHandler}
+                  onChange={DesChangeHandler}
                   required
                 ></Input>
               </Form.Field>
@@ -105,7 +105,7 @@ const createNFT = () => {
                 <Input
                   style={{ width: "500px" }}
                   type="file"
-                  onChange={fileChangeHandler}
+                  onChange={FileChangeHandler}
                   required
                 ></Input>
               </Form.Field>
@@ -116,7 +116,7 @@ const createNFT = () => {
                   label="ETH"
                   labelPosition="right"
                   value={price}
-                  onChange={priceChangeHandler}
+                  onChange={PriceChangeHandler}
                   required
                 ></Input>
               </Form.Field>

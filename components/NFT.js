@@ -8,7 +8,7 @@ import { Router } from "../routes";
 
 const NFT = ({ NFT }) => {
   const [loading, setLoading] = useState(false);
-  const buyNFT = async () => {
+  const BuyNFT = async () => {
     setLoading(true);
     try {
       const accounts = await web3.eth.requestAccounts();
@@ -42,7 +42,7 @@ const NFT = ({ NFT }) => {
           </Card.Group>
         </Grid.Row>
         <Grid.Row>
-          <Button secondary onClick={buyNFT} loading={loading}>
+          <Button secondary onClick={BuyNFT} loading={loading}>
             Buy Item
           </Button>
         </Grid.Row>

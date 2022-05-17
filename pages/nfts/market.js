@@ -9,7 +9,7 @@ import MarketItems from "../../components/MarketItems";
 const market = () => {
   const [loading, setLoading] = useState(false);
   const [NFTS, setNFTS] = useState([]);
-  const getNFTS = async () => {
+  const GetNFTS = async () => {
     setLoading(true);
     const items = await marketInstance.methods.fetchMarketItems().call();
     console.log(items);
@@ -36,7 +36,7 @@ const market = () => {
     setLoading(false);
   };
   useEffect(() => {
-    getNFTS();
+    GetNFTS();
   }, []);
   console.log(NFTS);
 
