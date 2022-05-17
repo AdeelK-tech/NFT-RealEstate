@@ -3,9 +3,14 @@ https://nftfarm-adeelr1001-gmailcom.vercel.app/
 
 
 DEPLOYMENT NETWORK : RINKEBY
+
 FRONT END : NEXT JS
+
 PROJECT CREATED ON : ALCHEMY
+
 DEVELOPMENT ENVIRONMENT: HARDHAT
+
+NFT DATABASE : IPFS
 
 To run from cmd
 1) Go to project root folder final-project 
