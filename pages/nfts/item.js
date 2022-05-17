@@ -1,6 +1,5 @@
 import { React, useEffect, useState } from "react";
-import Layout from "../../components/Layout";
-import marketInstance from "../../marketInstance";
+;import marketInstance from "../../marketInstance";
 import NFT from "../../components/NFT";
 import nftInstance from "../../nftInstance";
 import axios from "axios";
@@ -33,7 +32,7 @@ const Item = ({ props }) => {
   console.log(marketItem);
   return <NFT NFT={marketItem}></NFT>;
 };
-item.getInitialProps = async (props) => {
+Item.getInitialProps = async (props) => {
   let id = props.query.id;
   console.log(id);
   let nft = await marketInstance.methods.idToMarketItem(id).call();

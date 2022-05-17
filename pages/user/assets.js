@@ -4,10 +4,18 @@ import marketInstance from "../../marketInstance";
 import web3 from "../../web3";
 import nftInstance from "../../nftInstance";
 import axios from "axios";
-import Layout from "../../components/Layout";
+
 const UserAssets = () => {
   const [loading, setLoading] = useState(false);
   const [assets, setAssets] = useState([]);
+  const [address,setAddress]=useState('');
+  const AccountWasChanged=async()=>{
+    const accounts=await web3.eth.requestAccounts();
+    const account=accounts[0];
+    setAddress(account)
+  }
+  window.ethereum.on('accountsChanged',AccountWasChanged)
+ 
   const GetAssets = async () => {
     setLoading(true);
     const accounts = await web3.eth.requestAccounts();
@@ -33,11 +41,12 @@ const UserAssets = () => {
     );
     setAssets(userAssets);
     setLoading(false);
+    
   };
   useEffect(() => {
     GetAssets();
-  }, []);
+  }, [address]);
 
-  return <Assets assets={assets} loading={loading} />;
+  return <Assets assets={assets} loading={loading}/>;
 };
 export default UserAssets;

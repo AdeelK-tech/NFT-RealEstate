@@ -1,8 +1,9 @@
-import React from "react";
+import {React} from "react";
 import Layout from "./Layout";
 import { Card, Loader } from "semantic-ui-react";
 
-const Assets = ({ assets, loading }) => {
+const Assets = ({ assets, loading}) => {
+
   const displayItems = assets.map((nft, i) => {
     return {
       image: nft.image,
