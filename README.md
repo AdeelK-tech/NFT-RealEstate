@@ -1,3 +1,7 @@
+Vercel deployed App Link:
+https://nftfarm-adeelr1001-gmailcom.vercel.app/
+
+
 DEPLOYMENT NETWORK : RINKEBY
 FRONT END : NEXT JS
 PROJECT CREATED ON : ALCHEMY
