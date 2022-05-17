@@ -68,7 +68,7 @@ const CreateNFT = () => {
         from: accounts[0],
       });
     setLoading(false);
-    Router.pushRoute("/nfts/market");
+    Router.pushRoute("/nfts/Market");
     console.log("created");
   };
   return (

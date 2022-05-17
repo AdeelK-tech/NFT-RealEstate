@@ -10,19 +10,19 @@ const Header = () => {
         </a>
       </Link>
       <Menu.Menu position="right">
-        <Link route="/nfts/market">
+        <Link route="/nfts/Market">
           <a className="item">
             <b>MARKET</b>
           </a>
         </Link>
-        <Link route="/nfts/create">
+        <Link route="/nfts/Create">
           <a className="item">
             <b>+ CreateNFT</b>
           </a>
         </Link>
         <Dropdown item icon="user">
           <Dropdown.Menu>
-            <Link route="/user/assets">
+            <Link route="/user/Assets">
               <a>
                 <Dropdown.Item>My Assets</Dropdown.Item>
               </a>

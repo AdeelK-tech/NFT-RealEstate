@@ -18,7 +18,7 @@ const NFT = ({ NFT }) => {
           from: accounts[0],
           value: web3.utils.toWei(NFT.price, "ether"),
         });
-      Router.pushRoute("/nfts/market");
+      Router.pushRoute("/user/Assets");
     } catch (error) {
       console.log(error);
     }

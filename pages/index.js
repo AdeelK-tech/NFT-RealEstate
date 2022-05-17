@@ -32,7 +32,7 @@ function Home() {
       </Header>
       <Image src="/image_2.png" width={`${850}px`} height={`${350}px`}></Image>
 
-      <Link route="/nfts/create">
+      <Link route="/nfts/Create">
         <a>
           <Button
             floated="right"
