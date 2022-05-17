@@ -8,7 +8,7 @@ import nftInstance from "../../nftInstance";
 import web3 from "../../web3";
 import { Router } from "../../routes";
 const client = ipfsHttpClient("https://ipfs.infura.io:5001/api/v0");
-const createNFT = () => {
+const CreateNFT = () => {
   const [fileURL, setFileURL] = useState(null);
   const [price, setPrice] = useState("");
   const [name, setName] = useState("");
@@ -143,4 +143,4 @@ const createNFT = () => {
     </Layout>
   );
 };
-export default createNFT;
+export default CreateNFT;

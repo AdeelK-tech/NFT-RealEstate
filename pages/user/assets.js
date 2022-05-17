@@ -5,7 +5,7 @@ import web3 from "../../web3";
 import nftInstance from "../../nftInstance";
 import axios from "axios";
 import Layout from "../../components/Layout";
-const userAssets = () => {
+const UserAssets = () => {
   const [loading, setLoading] = useState(false);
   const [assets, setAssets] = useState([]);
   const GetAssets = async () => {
@@ -40,4 +40,4 @@ const userAssets = () => {
 
   return <Assets assets={assets} loading={loading} />;
 };
-export default userAssets;
+export default UserAssets;

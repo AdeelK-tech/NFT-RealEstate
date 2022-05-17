@@ -6,7 +6,7 @@ import axios from "axios";
 import web3 from "../../web3";
 import MarketItems from "../../components/MarketItems";
 
-const market = () => {
+const Market = () => {
   const [loading, setLoading] = useState(false);
   const [NFTS, setNFTS] = useState([]);
   const GetNFTS = async () => {
@@ -43,4 +43,4 @@ const market = () => {
   return <MarketItems loading={loading} items={NFTS}></MarketItems>;
 };
 
-export default market;
+export default Market;

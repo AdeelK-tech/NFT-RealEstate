@@ -6,7 +6,7 @@ import nftInstance from "../../nftInstance";
 import axios from "axios";
 import web3 from "../../web3";
 
-const item = ({ props }) => {
+const Item = ({ props }) => {
   const [marketItem, setMarketItem] = useState({});
   const { nft, id } = props;
   console.log(nft);
@@ -45,4 +45,4 @@ item.getInitialProps = async (props) => {
     },
   };
 };
-export default item;
+export default Item;
